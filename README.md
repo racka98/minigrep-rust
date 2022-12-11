@@ -4,7 +4,7 @@ Project from Rust Book which makes a light weight version of the `grep` CLI tool
 
 ## Usage
 
-- In the project dir with `rustc` installed (see #Build section)
+- In this project dir & with `rustc` installed on your machine (see #Build section)
 
 ```sh
 # Case Sensitive (ignores letter case)
