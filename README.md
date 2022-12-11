@@ -1,5 +1,7 @@
 # MiniGrep
 
+[![CI/CD Pipeline](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml/badge.svg?branch=master)](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml)
+
 Project from Rust Book which makes a light weight version of the `grep` CLI tool
 
 ## Usage
@@ -40,11 +42,24 @@ Remove-Item Env:IGNORE_CASE
 
 ## Build Binary
 
+### Build You Own Binary
+
 1. Install Rust by following [the official docs](https://www.rust-lang.org/tools/install)
 
 2. Run `cargo build` for Debug build or `cargo build --release` Release build
 
 3. You'll find your binaries in `target/debug` & `target/release` for Debug & Release respectively
+
+
+### Pre Built Binary from GitHub Actions
+
+[![CI/CD Pipeline](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml/badge.svg?branch=master)](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml)
+
+1. Head over to the [CI/CD Pipeline Action](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml)
+
+2. Click on one of the latest successful runs
+
+3. Scroll to the bottom to the `Atifacts` section and download the relevant binary
 
 ## Tests
 
