@@ -50,7 +50,6 @@ Remove-Item Env:IGNORE_CASE
 
 3. You'll find your binaries in `target/debug` & `target/release` for Debug & Release respectively
 
-
 ### Pre Built Binary from GitHub Actions
 
 [![CI/CD Pipeline](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml/badge.svg?branch=master)](https://github.com/racka98/minigrep-rust/actions/workflows/ci-cd-pipeline.yml)
