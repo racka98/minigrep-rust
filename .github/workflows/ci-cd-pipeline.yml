@@ -1,0 +1,68 @@
+name: CI/CD Pipeline
+# Test, Build and Output Binaries
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+
+jobs:
+
+  build_and_test:
+    strategy:
+      matrix:
+        config: [
+          { target: Windows, os: windows-latest, continueOnError: false },
+          { target: Linux, os: ubuntu-latest, continueOnError: false },
+        ]
+    runs-on: ${{ matrix.config.os }}
+    name: Build & Test ${{ matrix.config.target }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Pick Rust Toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+
+      - name: Run Tests
+        uses: actions-rs/cargo@v1
+        with:
+          command: test
+
+      - name: Build Release Binary
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
+          args: --release --all-features
+
+      - if: ${{ matrix.config.target == 'Windows' }}
+        name: Upload Windows Binary
+        uses: actions/upload-artifact@master
+        with:
+          name: windows-minigrep.exe
+          path: ./target/release/minigrep.exe
+
+      - if: ${{ matrix.config.target == 'Windows' }}
+        name: Upload Windows Binary Debug File
+        uses: actions/upload-artifact@master
+        with:
+          name: windows-minigrep-debug.pdb
+          path: ./target/release/minigrep.pdb
+
+      - if: ${{ matrix.config.target == 'Linux' }}
+        name: Upload Linux Binary
+        uses: actions/upload-artifact@master
+        with:
+          name: linux-minigrep
+          path: ./target/release/minigrep
